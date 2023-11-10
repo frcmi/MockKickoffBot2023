@@ -16,4 +16,11 @@ public final class Constants {
   public static class OperatorConstants {
     public static final int kDriverControllerPort = 0;
   }
+  public static class SwerveConstants { //TODO: get actual values from bot :)
+    public static final float driveKS = 0;
+    public static final float driveKV = 0;
+    public static final float driveKA = 0;
+    public static final SwerveModule Mod0 = new SwerveModule(
+      0, 0, 0, 0, 0)
+  }
 }
