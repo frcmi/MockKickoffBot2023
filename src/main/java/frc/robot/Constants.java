@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import edu.wpi.first.math.geometry.Rotation2d;
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants. This class should not be used for any other purpose. All constants should be declared
@@ -20,7 +22,32 @@ public final class Constants {
     public static final float driveKS = 0;
     public static final float driveKV = 0;
     public static final float driveKA = 0;
+
+    public static final int pigeonID = 0;
+
     public static final SwerveModule Mod0 = new SwerveModule(
-      0, 0, 0, 0, 0)
+      0, 
+      new Rotation2d(0), 
+      0, 
+      0, 
+      0);
+    public static final SwerveModule Mod1 = new SwerveModule(
+      1, 
+      new Rotation2d(0), 
+      0, 
+      0, 
+      0);
+    public static final SwerveModule Mod2 = new SwerveModule(
+      2, 
+      new Rotation2d(0), 
+      0, 
+      0, 
+      0);
+    public static final SwerveModule Mod3 = new SwerveModule(
+      3, 
+      new Rotation2d(0), 
+      0, 
+      0, 
+      0);
   }
 }
