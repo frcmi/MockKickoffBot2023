@@ -4,7 +4,12 @@
 
 package frc.robot;
 
+import com.ctre.phoenix6.mechanisms.swerve.SwerveModuleConstants;
+import com.ctre.phoenix6.mechanisms.swerve.SwerveModuleConstantsFactory;
+
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
@@ -23,31 +28,52 @@ public final class Constants {
     public static final float driveKV = 0;
     public static final float driveKA = 0;
 
+    //TODO: these aren't measured
+    public static final double wheelBase = 0.6069; // 24in
+    public static final double trackWidth = 0.6069; // 24in
+    public static final double wheelCircumference = 1.0;
+    public static final double driveMotorGearRatio = 1.0/1.0; //oh gosh not gear ratios
+    public static final double steerMotorGearRatio = 1.0/1.0;
+    public static final String CANbusName = "John \"The Can\" Busse";
+
+    public static final SwerveDriveKinematics swerveKinematics = new SwerveDriveKinematics(new Translation2d[] {
+      new Translation2d(wheelBase/2, trackWidth/2),
+      new Translation2d(wheelBase/2, -trackWidth/2),
+      new Translation2d(-wheelBase/2, trackWidth/2),
+      new Translation2d(-wheelBase/2, -trackWidth/2),
+      });
     public static final int pigeonID = 0;
 
+    private static final SwerveModuleConstantsFactory swerveConstantsFactory = new SwerveModuleConstantsFactory()
+      .withDriveMotorGearRatio(driveMotorGearRatio)
+      .withSteerMotorGearRatio(steerMotorGearRatio)
+      .withWheelRadius(driveKA)
+      .withSlipCurrent(driveKA)
+      .withSteerMotorGains(null)
+      .withDriveMotorGains(null)
+      .withSpeedAt12VoltsMps(driveKA)
+      .withSteerInertia(driveKA)
+      .withDriveInertia(driveKA)
+      .withFeedbackSource(null)
+      .withCouplingGearRatio(driveKA)
+      .withSteerMotorInverted(false);
+
+    //TODO: make these fr (also location is in meters)
     public static final SwerveModule Mod0 = new SwerveModule(
       0, 
       new Rotation2d(0), 
-      0, 
-      0, 
-      0);
+      swerveConstantsFactory.createModuleConstants(0, 0, 0, 0, 0, 0, false));
     public static final SwerveModule Mod1 = new SwerveModule(
       1, 
       new Rotation2d(0), 
-      0, 
-      0, 
-      0);
-    public static final SwerveModule Mod2 = new SwerveModule(
+      swerveConstantsFactory.createModuleConstants(0, 0, 0, 0, 0, 0, false));
+      public static final SwerveModule Mod2 = new SwerveModule(
       2, 
       new Rotation2d(0), 
-      0, 
-      0, 
-      0);
-    public static final SwerveModule Mod3 = new SwerveModule(
+      swerveConstantsFactory.createModuleConstants(0, 0, 0, 0, 0, 0, false));
+      public static final SwerveModule Mod3 = new SwerveModule(
       3, 
       new Rotation2d(0), 
-      0, 
-      0, 
-      0);
+      swerveConstantsFactory.createModuleConstants(0, 0, 0, 0, 0, 0, false));
   }
 }

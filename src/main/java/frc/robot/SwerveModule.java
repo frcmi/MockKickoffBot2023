@@ -8,6 +8,8 @@ import com.ctre.phoenix6.mechanisms.swerve.SwerveModuleConstants;
 
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.kinematics.SwerveModulePosition;
+import edu.wpi.first.math.kinematics.SwerveModuleState;
 import frc.math.Conversions;
 import frc.robot.Constants.SwerveConstants;
 
@@ -32,9 +34,17 @@ public class SwerveModule {
         driveMotor = new TalonFX(moduleConstants.DriveMotorId);
     }
 
-    public void setBrakeMode(boolean brakeMode) {
-        if (brakeMode == false) {
+    public SwerveModulePosition getModulePosition() {
+        return new SwerveModulePosition(
+            Conversions.falconToMeters(driveMotor.get, SwerveConstants.wheelCircumference, SwerveConstants.driveMotorGearRatio),
+            getSteerMotorAngle());
+    }
 
-        }
+    public Rotation2d getSteerMotorAngle() {
+        return Rotation2d.fromDegrees(Conversions.falconToDegrees(moduleNumber, SwerveConstants.steerMotorGearRatio));
+    }
+
+    public void stopDriveMotor() {
+        driveMotor.stopMotor();
     }
 }
