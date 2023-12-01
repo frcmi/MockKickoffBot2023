@@ -4,13 +4,6 @@
 
 package frc.robot;
 
-import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.geometry.Translation2d;
-import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
-import edu.wpi.first.math.trajectory.TrapezoidProfile;
-import edu.wpi.first.math.util.Units;
-
-
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants. This class should not be used for any other purpose. All constants should be declared
@@ -23,10 +16,12 @@ public final class Constants {
   public static final class OperatorConstants {
     public static final int kDriverControllerPort = 0; //TODO: Input actual number
   }
+
   public static final class IntakeConstants {
     public static final int kFlywheelMotorId = 5; // TODO: Input actual number
     public static final int kFlywheelMotorId2 = 7; // TODO: Input actual number
   }
+
   public static final class ArmConstants {
       public static final int kLeftArmMotorId = 19; // TODO: Input actual number
       public static final int kRightArmMotorId = 10; // TODO: Input actual number
