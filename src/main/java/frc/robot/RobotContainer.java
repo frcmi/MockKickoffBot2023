@@ -10,6 +10,7 @@ import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.ArmSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.OuttakeSubsystem;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -33,6 +34,7 @@ public class RobotContainer {
   // Subsystems
   private final IntakeSubsystem s_Intake = new IntakeSubsystem();
   private final ArmSubsystem s_Arm = new ArmSubsystem();
+  private final OuttakeSubsystem s_Outake = new OuttakeSubsystem();
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -45,7 +47,7 @@ public class RobotContainer {
 
   private void configureBindings() {
     // Arm
-    driver.povDown().whileTrue(s_Arm.wristUpVolts());
+    driver.povDown().whileTrue(s_Arm.wristDownVolts());
     driver.povUp().whileTrue(s_Arm.wristUpVolts());
     // Intake
     driver.rightTrigger().whileTrue(s_Intake.intake());

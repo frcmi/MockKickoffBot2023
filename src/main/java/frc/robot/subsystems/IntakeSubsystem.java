@@ -20,8 +20,8 @@ public class IntakeSubsystem extends SubsystemBase{
 
     public IntakeSubsystem() {
         flywheelMotor.setNeutralMode(NeutralModeValue.Coast);
-        flywheelMotor.configureStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 40, 60, 0.1));
-        setDefaultCommand(hold());
+        //flywheelMotor.configureStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 40, 60, 0.1)); TODO: Figure out later
+        setDefaultCommand(stop());
     } 
 
     @Override
@@ -36,15 +36,15 @@ public class IntakeSubsystem extends SubsystemBase{
 
         public Command intake(){
         return run(
-                () -> {flywheelMotor.set(1); // TODO: Input actual bumer
+                () -> {flywheelMotor.set(1); // TODO: Input actual number
                 }
         ).withName("Intake");
     }
 
-        public Command hold() {
+        public Command stop() {
         return run(
-            () -> {flywheelMotor.setVoltage(2); // TODO: Input actual number
+            () -> {flywheelMotor.set(0); // TODO: Input actual number
                 }
-        );
+        ).withName("Stop");
     }
 }

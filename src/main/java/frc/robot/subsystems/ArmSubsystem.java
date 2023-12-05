@@ -14,8 +14,8 @@ public class ArmSubsystem extends SubsystemBase{
 
     public ArmSubsystem() {
         armMotor.setNeutralMode(NeutralModeValue.Brake);
-        armMotor.setInverted(true); //TODO: I dont fricken know???
-        armMotor.configureStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 40, 60, 0.1));
+        armMotor.setInverted(true); //TODO: I don't know???
+        // armMotor.configureStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 40, 60, 0.1)); TODO: Figure out later
         setDefaultCommand(hold());
         }
     
@@ -54,5 +54,15 @@ public class ArmSubsystem extends SubsystemBase{
 
     public Command stop() {
         return run(() -> armMotor.set(0)).withName("Stop");
+    }
+
+    @Override
+    public void periodic() {
+        var currentCommand = this.getCurrentCommand();
+        if (currentCommand != null){
+            SmartDashboard.putString("Arm Command", currentCommand.getName());
+        } else {
+            SmartDashboard.putString("Arm Command", "");
+        }
     }
 }
