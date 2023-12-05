@@ -1,8 +1,10 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix6.hardware.Pigeon2;
+import com.ctre.phoenix6.mechanisms.swerve.SwerveDrivetrain;
 import com.ctre.phoenix6.mechanisms.swerve.SwerveDrivetrainConstants;
 import com.ctre.phoenix6.mechanisms.swerve.SwerveModuleConstantsFactory;
+import com.ctre.phoenix6.mechanisms.swerve.SwerveRequest;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
@@ -18,7 +20,40 @@ public class SwerveSubsystem {
         .withCANbusName(SwerveConstants.CANbusName)
         .withSupportsPro(false);
     public Pigeon2 gyro = new Pigeon2(SwerveConstants.pigeonID); 
-    public SwerveDriveOdometry swerveDriveOdometry = new SwerveDriveOdometry(SwerveConstants.swerveKinematics, gyro.getRotation2d(), getModulePositions());
+    public SwerveDrivetrain swerveDrivetrain = new SwerveDrivetrain(
+        swerveDrivetrainConstants, 
+        SwerveConstants.Mod0.moduleConstants,
+        SwerveConstants.Mod1.moduleConstants,
+        SwerveConstants.Mod2.moduleConstants,
+        SwerveConstants.Mod3.moduleConstants);
+
+    
+
+    public void driveFieldCentric(double forwardVelocity, double sidewaysVelocity, double rotationAboutCenter) {
+        SwerveRequest.FieldCentric driveRequest = new SwerveRequest.FieldCentric()
+            .withIsOpenLoop(true)
+            .withVelocityX(forwardVelocity)
+            .withVelocityY(sidewaysVelocity)
+            .withRotationalRate(rotationAboutCenter);
+        swerveDrivetrain.setControl(
+            driveRequest
+        );
+    }
+    public void driveRobotCentric(double forwardVelocity, double sidewaysVelocity, double rotationAboutCenter) {
+        SwerveRequest.RobotCentric driveRequest = new SwerveRequest.RobotCentric()
+            .withIsOpenLoop(true)
+            .withVelocityX(forwardVelocity)
+            .withVelocityY(sidewaysVelocity)
+            .withRotationalRate(rotationAboutCenter);
+        swerveDrivetrain.setControl(
+            driveRequest
+        );
+    }
+    public void driveSwerveRequest(SwerveRequest driveRequest) {
+        swerveDrivetrain.setControl(
+            driveRequest
+        );
+    }
 
     public SwerveModule[] swerveModules = {
         SwerveConstants.Mod0,
@@ -29,14 +64,6 @@ public class SwerveSubsystem {
 
     public SwerveSubsystem() {
         resetGyro();
-    }
-
-    public SwerveModulePosition[] getModulePositions() {
-        SwerveModulePosition[] moduleStates = new SwerveModulePosition[swerveModules.length];
-        for (int i = 0; i < moduleStates.length; i++) {
-            moduleStates[i] = swerveModules[i].getModulePosition();
-        }
-        return moduleStates;
     }
 
     public void resetGyro() {

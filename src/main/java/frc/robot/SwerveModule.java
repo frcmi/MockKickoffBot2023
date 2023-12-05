@@ -34,12 +34,6 @@ public class SwerveModule {
         driveMotor = new TalonFX(moduleConstants.DriveMotorId);
     }
 
-    public SwerveModulePosition getModulePosition() {
-        return new SwerveModulePosition(
-            Conversions.falconToMeters(driveMotor.get, SwerveConstants.wheelCircumference, SwerveConstants.driveMotorGearRatio),
-            getSteerMotorAngle());
-    }
-
     public Rotation2d getSteerMotorAngle() {
         return Rotation2d.fromDegrees(Conversions.falconToDegrees(moduleNumber, SwerveConstants.steerMotorGearRatio));
     }

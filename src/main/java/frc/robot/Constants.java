@@ -4,8 +4,11 @@
 
 package frc.robot;
 
+import com.ctre.phoenix6.configs.Slot0Configs;
 import com.ctre.phoenix6.mechanisms.swerve.SwerveModuleConstants;
 import com.ctre.phoenix6.mechanisms.swerve.SwerveModuleConstantsFactory;
+import com.ctre.phoenix6.mechanisms.swerve.SwerveModuleConstants.SwerveModuleSteerFeedbackType;
+import com.ctre.phoenix6.signals.FeedbackSensorSourceValue;
 
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
@@ -22,6 +25,7 @@ import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 public final class Constants {
   public static class OperatorConstants {
     public static final int kDriverControllerPort = 0;
+    public static final int controllerPort = 0;
   }
   public static class SwerveConstants { //TODO: get actual values from bot :)
     public static final float driveKS = 0;
@@ -31,8 +35,16 @@ public final class Constants {
     //TODO: these aren't measured
     public static final double wheelBase = 0.6069; // 24in
     public static final double trackWidth = 0.6069; // 24in
-    public static final double wheelCircumference = 1.0;
-    public static final double driveMotorGearRatio = 1.0/1.0; //oh gosh not gear ratios
+    public static final double wheelRadius = 1.0;
+    public static final double slipCurrent = 1.0;
+    public static final Slot0Configs steerMotorGains = new Slot0Configs();
+    public static final Slot0Configs driveMotorGains = new Slot0Configs();
+    public static final double speed12Volts = 1.0;
+    public static final double steerIntertia = 1.0;
+    public static final double driveIntertia = 1.0;
+    public static final SwerveModuleSteerFeedbackType feedbackSource = SwerveModuleSteerFeedbackType.RemoteCANcoder;
+    public static final double couplingGearRatio = 1.0;
+    public static final double driveMotorGearRatio = 1.0/1.0;
     public static final double steerMotorGearRatio = 1.0/1.0;
     public static final String CANbusName = "John \"The Can\" Busse";
 
@@ -44,18 +56,29 @@ public final class Constants {
       });
     public static final int pigeonID = 0;
 
+    /* not all these are required, idk which ones we have, required are:
+     * drive gear ratio
+     * steer gear ratio
+     * wheel radius
+     * steer motor gains
+     * drive motor gains
+     * speed at 12v
+     * feedback source
+     * 
+     * for simulation to work, you also need both the inertias
+     */
     private static final SwerveModuleConstantsFactory swerveConstantsFactory = new SwerveModuleConstantsFactory()
       .withDriveMotorGearRatio(driveMotorGearRatio)
       .withSteerMotorGearRatio(steerMotorGearRatio)
-      .withWheelRadius(driveKA)
-      .withSlipCurrent(driveKA)
-      .withSteerMotorGains(null)
-      .withDriveMotorGains(null)
-      .withSpeedAt12VoltsMps(driveKA)
-      .withSteerInertia(driveKA)
-      .withDriveInertia(driveKA)
-      .withFeedbackSource(null)
-      .withCouplingGearRatio(driveKA)
+      .withWheelRadius(wheelRadius)
+      .withSlipCurrent(slipCurrent)
+      .withSteerMotorGains(steerMotorGains)
+      .withDriveMotorGains(driveMotorGains)
+      .withSpeedAt12VoltsMps(speed12Volts)
+      .withSteerInertia(steerIntertia)
+      .withDriveInertia(driveIntertia)
+      .withFeedbackSource(feedbackSource)
+      .withCouplingGearRatio(couplingGearRatio)
       .withSteerMotorInverted(false);
 
     //TODO: make these fr (also location is in meters)
