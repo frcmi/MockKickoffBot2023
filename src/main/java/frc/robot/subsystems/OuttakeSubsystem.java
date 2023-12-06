@@ -1,12 +1,17 @@
 package frc.robot.subsystems;
 
-import edu.wpi.first.math.filter.MedianFilter;
-import edu.wpi.first.wpilibj.motorcontrol.Spark;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj2.command.Commands;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import com.ctre.phoenix6.hardware.TalonFX;
+import frc.robot.Constants.OuttakeConstants;
 
 public class OuttakeSubsystem {
-    
+    TalonFX upperMotor = new TalonFX (OuttakeConstants.upperMotorID);
+    TalonFX lowerMotor = new TalonFX (OuttakeConstants.lowerMotorID);
+    TalonFX hoodMotor = new TalonFX (OuttakeConstants.hoodMotorID);
+
+    public void setMotors(double upperMotorSpeed, double lowerMotorSpeed, double hoodMotorSpeed){
+        upperMotor.set(upperMotorSpeed);
+        lowerMotor.set(lowerMotorSpeed);
+        hoodMotor.set(hoodMotorSpeed);
+    }
 }
+

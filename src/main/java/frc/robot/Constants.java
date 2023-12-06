@@ -99,4 +99,11 @@ public final class Constants {
       new Rotation2d(0), 
       swerveConstantsFactory.createModuleConstants(0, 0, 0, 0, 0, 0, false));
   }
+    public static class OuttakeConstants {
+      public static final int upperMotorID = 10;
+      public static final int lowerMotorID = 11;
+      public static final int hoodMotorID = 12;
+      
+    }
 }
+
