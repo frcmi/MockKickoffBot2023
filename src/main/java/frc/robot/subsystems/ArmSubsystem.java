@@ -46,10 +46,7 @@ public class ArmSubsystem extends SubsystemBase{
     }
         
     public Command hold() {
-        return run(
-            () -> {armMotor.setVoltage(2);
-            }
-        ).withName("Hold");
+        return run(() -> armMotor.setVoltage(ArmConstants.kArmHoldVolts)).withName("Hold");
     }
 
     public Command stop() {

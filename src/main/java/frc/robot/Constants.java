@@ -28,6 +28,8 @@ public final class Constants {
 
       public static final int kCurrentLimit = 40; // TODO: Input actual number
 
+      public static final int kArmHoldVolts = 2; // TODO: Input actual number
+      
       public static final double kArmDownPercent = 0.3; // TODO: Input actual number
       public static final double kArmUpPercent = 0.3; // TODO: Input actual number
 
