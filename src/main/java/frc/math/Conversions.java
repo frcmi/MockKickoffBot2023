@@ -1,6 +1,7 @@
 package frc.math;
 
 public class Conversions {
+    private static final double kMetersPerInch = 0.0254;
 
     /**
      * @param positionCounts CANCoder Position Counts
@@ -9,6 +10,16 @@ public class Conversions {
      */
     public static double CANcoderToDegrees(double positionCounts, double gearRatio) {
         return positionCounts * (360.0 / (gearRatio * 4096.0));
+    }
+
+    /**
+   * Converts given inches to meters.
+   *
+   * @param inches The inches to convert to meters.
+   * @return Meters converted from inches.
+   */
+    public static double inchesToMeters(double inches) {
+        return inches * kMetersPerInch;
     }
 
     /**

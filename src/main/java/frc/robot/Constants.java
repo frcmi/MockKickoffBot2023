@@ -13,6 +13,7 @@ import com.ctre.phoenix6.signals.FeedbackSensorSourceValue;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
+import frc.math.Conversions;
 
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
@@ -24,7 +25,6 @@ import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
  */
 public final class Constants {
   public static class OperatorConstants {
-    public static final int kDriverControllerPort = 0;
     public static final int controllerPort = 0;
   }
   public static class SwerveConstants { //TODO: get actual values from bot :)
@@ -33,10 +33,10 @@ public final class Constants {
     public static final float driveKA = 0;
 
     //TODO: these aren't measured
-    public static final double wheelBase = 0.6069; // 24in
-    public static final double trackWidth = 0.6069; // 24in
+    public static final double wheelBase = Conversions.inchesToMeters(24); // 24in
+    public static final double trackWidth = Conversions.inchesToMeters(24); // 24in
     public static final double wheelRadius = 1.0;
-    public static final double slipCurrent = 1.0;
+    public static final double slipCurrent = 0; 
     public static final Slot0Configs steerMotorGains = new Slot0Configs();
     public static final Slot0Configs driveMotorGains = new Slot0Configs();
     public static final double speed12Volts = 1.0;
@@ -44,9 +44,9 @@ public final class Constants {
     public static final double driveIntertia = 1.0;
     public static final SwerveModuleSteerFeedbackType feedbackSource = SwerveModuleSteerFeedbackType.RemoteCANcoder;
     public static final double couplingGearRatio = 1.0;
-    public static final double driveMotorGearRatio = 1.0/1.0;
+    public static final double driveMotorGearRatio = (150.0 / 7.0) / 1.0;
     public static final double steerMotorGearRatio = 1.0/1.0;
-    public static final String CANbusName = "John \"The Can\" Busse";
+    public static final String CANbusName = "rio";
 
     public static final SwerveDriveKinematics swerveKinematics = new SwerveDriveKinematics(new Translation2d[] {
       new Translation2d(wheelBase/2, trackWidth/2),
@@ -84,19 +84,47 @@ public final class Constants {
     //TODO: make these fr (also location is in meters)
     public static final SwerveModule Mod0 = new SwerveModule(
       0, 
-      new Rotation2d(0), 
-      swerveConstantsFactory.createModuleConstants(0, 0, 0, 0, 0, 0, false));
+      Rotation2d.fromDegrees(329.59), 
+      swerveConstantsFactory.createModuleConstants(
+        5, 
+        1, 
+        11, 
+        0, 
+        trackWidth/2, 
+        wheelBase/2, 
+        false));
     public static final SwerveModule Mod1 = new SwerveModule(
       1, 
-      new Rotation2d(0), 
-      swerveConstantsFactory.createModuleConstants(0, 0, 0, 0, 0, 0, false));
+      Rotation2d.fromDegrees(136.93), 
+      swerveConstantsFactory.createModuleConstants(
+        2, 
+        6, 
+        12, 
+        0, 
+        -trackWidth/2, 
+        wheelBase/2,
+        false));
       public static final SwerveModule Mod2 = new SwerveModule(
       2, 
-      new Rotation2d(0), 
-      swerveConstantsFactory.createModuleConstants(0, 0, 0, 0, 0, 0, false));
+      Rotation2d.fromDegrees(126.83), 
+      swerveConstantsFactory.createModuleConstants(
+        3, 
+        7, 
+        12, 
+        0, 
+        -trackWidth/2, 
+        -wheelBase/2, 
+          false));
       public static final SwerveModule Mod3 = new SwerveModule(
       3, 
-      new Rotation2d(0), 
-      swerveConstantsFactory.createModuleConstants(0, 0, 0, 0, 0, 0, false));
+      Rotation2d.fromDegrees(110.65)  , 
+      swerveConstantsFactory.createModuleConstants(
+        4, 
+        8, 
+        14, 
+        0, 
+        trackWidth/2, 
+        -wheelBase/2, 
+        false));
   }
 }
