@@ -27,6 +27,12 @@ public final class Constants {
     public static final int kDriverControllerPort = 0;
     public static final int controllerPort = 0;
   }
+  public static class ShooterConstants {
+    public static final double ballMpsAtFullPower = 0;
+    public static final float hoodKP = 0;
+    public static final float hoodKI = 0;
+    public static final float hoodKD = 0;
+  }
   public static class SwerveConstants { //TODO: get actual values from bot :)
     public static final float driveKS = 0;
     public static final float driveKV = 0;
