@@ -59,7 +59,17 @@ public class PositionEstimationSubsystem extends SubsystemBase
             lastPose = poseEstimator.update();
         }
 
-        SmartDashboard.putString("Pose", lastPose.toString());
+        var pose = lastPose.get().estimatedPose;
+        var translation = pose.getTranslation();
+        var rotation = pose.getRotation();
+
+        SmartDashboard.putNumber("Translation X", translation.getX());
+        SmartDashboard.putNumber("Translation Y", translation.getY());
+        SmartDashboard.putNumber("Translation Z", translation.getZ());
+
+        SmartDashboard.putNumber("Rotation pitch", rotation.getX());
+        SmartDashboard.putNumber("Rotation yaw", rotation.getY());
+        SmartDashboard.putNumber("Rotation roll", rotation.getZ());
     }
 
     public PhotonTrackedTarget getTargets()
